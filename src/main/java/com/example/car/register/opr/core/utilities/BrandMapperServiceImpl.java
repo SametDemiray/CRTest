@@ -1,0 +1,30 @@
+package com.example.car.register.opr.core.utilities;
+
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class BrandMapperServiceImpl implements BrandMapperService{
+
+    private ModelMapper modelMapper;
+
+    @Override
+    public ModelMapper forResponse() {
+        this.modelMapper.getConfiguration()
+                .setAmbiguityIgnored(true)
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
+        return this.modelMapper;
+    }
+    @Override
+    public ModelMapper forRequest() {
+        this.modelMapper.getConfiguration()
+                .setAmbiguityIgnored(true)
+                .setMatchingStrategy(MatchingStrategies.STANDARD);
+        return this.modelMapper;
+    }
+
+
+}
